@@ -4,6 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Never Miss Another Call — The First-Response Capture System</title>
+
+<!-- SEO & Sharing Meta -->
+<meta name="description" content="A 24/7 call capture system for HVAC, plumbing, electrical, roofing, and restoration businesses. Stop losing jobs to unanswered calls.">
+<meta property="og:title" content="Never Miss Another Call — The First-Response Capture System">
+<meta property="og:description" content="When you can't answer, your phone still does. Every missed call captured, every job detail collected, instant notification to you. Live in under a week.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jrzconsultingsolutions.com">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Never Miss Another Call — The First-Response Capture System">
+<meta name="twitter:description" content="A 24/7 call capture system for emergency trade businesses. Stop losing jobs to unanswered calls.">
+<meta property="og:image" content="https://jrzconsultingsolutions.com/og-image.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<link rel="canonical" href="https://jrzconsultingsolutions.com/">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -84,6 +104,11 @@
     clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
   }
   .btn:hover { background: var(--accent-dim); transform: translateY(-1px); }
+  .btn:focus-visible {
+    outline: 2px solid var(--white);
+    outline-offset: 4px;
+    background: var(--accent-dim);
+  }
   .btn-secondary {
     display: inline-block;
     background: transparent;
@@ -103,6 +128,8 @@
     margin-top: 20px;
   }
   .btn-secondary:hover { color: var(--white); border-color: var(--muted); }
+  .btn-secondary:focus-visible { outline: 2px solid var(--white); outline-offset: 4px; color: var(--white); }
+  a:focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
 
   /* NAV */
   nav {
@@ -234,20 +261,32 @@
   .faq-q { font-size: 18px; font-weight: 600; color: var(--white); margin-bottom: 14px; }
   .faq-a { color: var(--light); max-width: 680px; }
 
-  /* A/B SECTION */
-  .ab-section { background: var(--dark); border-top: 1px solid var(--border); padding: 64px 0; }
-  .ab-card { background: var(--near-black); border: 1px solid var(--border); padding: 24px 28px; margin-bottom: 12px; }
-  .ab-card:last-child { margin-bottom: 0; }
-  .ab-tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; display: block; }
-  .ab-headline { font-family: var(--display); font-size: clamp(22px, 3.5vw, 34px); line-height: 1.05; color: var(--white); margin-bottom: 8px; }
-  .ab-why { font-size: 13px; color: var(--muted); }
-  .btn-variations { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
-  .btn-var { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; padding: 12px 20px; border: 1px solid var(--border); color: var(--light); background: var(--near-black); }
-
   /* FOOTER */
-  footer { padding: 32px 0; border-top: 1px solid var(--border); }
-  footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
-  footer p { font-family: var(--mono); font-size: 11px; color: var(--muted); margin: 0; letter-spacing: 0.06em; }
+  footer { padding: 40px 0 0; border-top: 1px solid var(--border); }
+  .footer-main {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    flex-wrap: wrap; gap: 16px; padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .footer-brand p { font-family: var(--mono); font-size: 11px; color: var(--muted); margin: 0 0 4px; letter-spacing: 0.06em; }
+  .footer-links { display: flex; gap: 20px; align-items: center; }
+  .footer-links a {
+    font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.08em;
+    text-decoration: none; text-transform: uppercase;
+    border-bottom: 1px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .footer-links a:hover { color: var(--light); border-color: var(--border); }
+  .footer-disclaimer {
+    padding: 16px 0 28px;
+    font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.04em;
+    line-height: 1.7;
+  }
+
+  /* LEGAL SECTIONS */
+  .legal-section { padding: 56px 0; border-bottom: 1px solid var(--border); }
+  .legal-section h3 { font-size: 16px; margin-bottom: 16px; }
+  .legal-section p { font-size: 14px; color: var(--muted); margin-bottom: 10px; }
 
   /* ANIMATIONS */
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -257,10 +296,21 @@
   .fade-up:nth-child(3) { animation-delay: 0.4s; }
   .fade-up:nth-child(4) { animation-delay: 0.55s; }
 
+  /* REDUCED MOTION */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .fade-up { opacity: 1; animation: none; }
+    .ticker-inner { animation: none; }
+    .btn, .btn-secondary, .footer-links a { transition: none; }
+  }
+
   @media (max-width: 600px) {
     .container { padding: 0 20px; }
     .math-block { padding: 20px; }
-    footer .container { flex-direction: column; align-items: flex-start; }
+    .footer-main { flex-direction: column; }
+    #calculator div[style*="grid-template-columns"] {
+      grid-template-columns: 1fr !important;
+    }
   }
 </style>
 </head>
@@ -283,18 +333,18 @@
       A MONTH TO <span class="accent">UNANSWERED CALLS.</span>
     </h1>
     <p class="hero-sub fade-up">
-      Your phone gets answered every time — nights, weekends, peak hours — and you get the job details within seconds. No new staff. No hardware. Live in under a week.
+      Your phone gets answered every time — nights, weekends, peak hours — and you get the job details promptly. No new staff. No hardware. Live in under a week.
     </p>
     <div class="hero-cta-group fade-up">
       <a href="#book" class="btn">Get My Revenue Estimate — Free</a>
       <a href="#calculator" class="btn-secondary">Not ready to talk? Run the numbers yourself →</a>
     </div>
-    <p class="hero-meta fade-up">Takes 15 minutes. You'll leave knowing your number whether you move forward or not.</p>
+    <p class="hero-meta fade-up">Takes 15 minutes. You'll leave the 15-Minute Revenue Estimate Call knowing your number whether you move forward or not.</p>
   </div>
 </section>
 
 <!-- TICKER -->
-<div class="ticker">
+<div class="ticker" aria-hidden="true">
   <span class="ticker-inner">
     HVAC &nbsp;&nbsp;·&nbsp;&nbsp; PLUMBING &nbsp;&nbsp;·&nbsp;&nbsp; ELECTRICAL &nbsp;&nbsp;·&nbsp;&nbsp; ROOFING &nbsp;&nbsp;·&nbsp;&nbsp; RESTORATION &nbsp;&nbsp;·&nbsp;&nbsp; HVAC &nbsp;&nbsp;·&nbsp;&nbsp; PLUMBING &nbsp;&nbsp;·&nbsp;&nbsp; ELECTRICAL &nbsp;&nbsp;·&nbsp;&nbsp; ROOFING &nbsp;&nbsp;·&nbsp;&nbsp; RESTORATION &nbsp;&nbsp;·&nbsp;&nbsp; HVAC &nbsp;&nbsp;·&nbsp;&nbsp; PLUMBING &nbsp;&nbsp;·&nbsp;&nbsp; ELECTRICAL &nbsp;&nbsp;·&nbsp;&nbsp; ROOFING &nbsp;&nbsp;·&nbsp;&nbsp; RESTORATION &nbsp;&nbsp;·&nbsp;&nbsp; HVAC &nbsp;&nbsp;·&nbsp;&nbsp; PLUMBING &nbsp;&nbsp;·&nbsp;&nbsp; ELECTRICAL &nbsp;&nbsp;·&nbsp;&nbsp; ROOFING &nbsp;&nbsp;·&nbsp;&nbsp; RESTORATION &nbsp;&nbsp;·&nbsp;&nbsp;
   </span>
@@ -330,7 +380,7 @@
     <span class="label">The Solution</span>
     <div class="mechanism-name">The First-Response Capture System</div>
 
-    <p>Most emergency callers move on fast — often within minutes — before moving to the next option. The First-Response Capture System picks up before that window closes. It handles the call the way a trained dispatcher would: asking the right questions, gathering the job details you need, and sending you an alert immediately. You get the information. You decide what to do next.</p>
+    <p>Most emergency callers move on fast — often within minutes. The First-Response Capture System picks up before that window closes. It handles the call the way a trained dispatcher would: asking the right questions, gathering the job details you need, and sending you an alert promptly. You get the information. You decide what to do next.</p>
 
     <div class="feature-grid">
       <div class="feature-item">
@@ -345,8 +395,8 @@
       </div>
       <div class="feature-item">
         <span class="feature-num">03</span>
-        <h3>Sends You an Instant Notification</h3>
-        <p>Within seconds, you receive a text or email with the caller's full details. Call back in minutes — before they've moved on to the next option.</p>
+        <h3>Sends You a Fast Notification</h3>
+        <p>You receive a text or email with the caller's full details shortly after the call is handled. Call back quickly — before they've moved on to the next option.</p>
       </div>
       <div class="feature-item">
         <span class="feature-num">04</span>
@@ -397,7 +447,7 @@
         <div class="step-num">01</div>
         <div>
           <h3>You're Live in 3 to 5 Business Days.</h3>
-          <p>We handle the entire configuration: your service area, job types, hours, escalation rules, and notification preferences. You do not install anything. You do not change your phone number. On Day 1 of setup, we send you a brief intake form — takes about 10 minutes to complete. By Day 5, the system is tested, approved by you, and live. Most owners have zero involvement after the initial intake.</p>
+          <p>We handle the entire configuration: your service area, job types, hours, escalation rules, and notification preferences. You do not install anything. You do not change your phone number. On Day 1 of setup, we send you a brief intake form — takes about 10 minutes to complete. By Day 5, the system is tested, approved by you, and live. Most owners have minimal involvement after the initial intake.</p>
         </div>
       </div>
       <div class="step">
@@ -411,7 +461,7 @@
         <div class="step-num">03</div>
         <div>
           <h3>You Get the Information. You Decide What to Do Next.</h3>
-          <p>Within seconds, you receive a notification with the caller's name, issue, location, and contact info. You call back when it makes sense. No missed opportunities. No cold leads. No guessing who called.</p>
+          <p>You receive a notification with the caller's name, issue, location, and contact info. You call back when it makes sense. No missed opportunities. No cold leads. No guessing who called.</p>
         </div>
       </div>
     </div>
@@ -435,7 +485,7 @@
       </thead>
       <tbody>
         <tr>
-          <td>24/7 Call Answer Coverage</td>
+          <td>24/7 Missed-Call Response Coverage</td>
           <td>Every missed call is picked up — evenings, weekends, peak hours. No gaps.</td>
           <td>Included</td>
         </tr>
@@ -445,8 +495,8 @@
           <td>Included</td>
         </tr>
         <tr>
-          <td>Instant Owner Notification</td>
-          <td>You receive a text or email within seconds of a call being handled — with all job details attached.</td>
+          <td>Owner Notification</td>
+          <td>You receive a text or email promptly after a call is handled — with all job details attached.</td>
           <td>Included</td>
         </tr>
         <tr>
@@ -460,7 +510,7 @@
           <td>Included</td>
         </tr>
         <tr>
-          <td>Full Setup & Configuration</td>
+          <td>Full Setup &amp; Configuration</td>
           <td>We handle everything. No technical work required from your side.</td>
           <td>Included</td>
         </tr>
@@ -488,12 +538,12 @@
       <p>On a free 15-minute call, we'll take your actual numbers — average job value, call volume, peak hours — and give you a specific estimate of what you're currently leaving on the table. You'll leave knowing the number whether you move forward with us or not.</p>
       <p>No sales presentation. No pressure. Just your numbers.</p>
       <a href="#book" class="btn">Get My Revenue Estimate — Free</a>
-      <p class="cta-note">15 minutes. You'll have a specific number by the end of the call.</p>
+      <p class="cta-note">15 minutes. You'll have a specific number by the end of the 15-Minute Revenue Estimate Call.</p>
     </div>
   </div>
 </section>
 
-<!-- CALCULATOR ANCHOR (secondary CTA destination) -->
+<!-- CALCULATOR -->
 <section id="calculator" style="padding: 64px 0; background: var(--near-black);">
   <div class="container">
     <span class="label">Missed Call Calculator</span>
@@ -503,20 +553,20 @@
     <div style="background: var(--black); border: 1px solid var(--border); padding: 36px; margin-top: 32px;">
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px;">
         <div>
-          <label style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 10px;">Average Job Value ($)</label>
-          <input type="number" id="jobValue" value="450" min="0"
+          <label for="jobValue" style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 10px;">Average Job Value ($)</label>
+          <input type="number" id="jobValue" value="450" min="0" aria-label="Average job value in dollars"
             style="width: 100%; background: var(--near-black); border: 1px solid var(--border); color: var(--white); font-family: var(--mono); font-size: 18px; padding: 14px 16px; outline: none;">
         </div>
         <div>
-          <label style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 10px;">Missed Calls Per Week</label>
-          <input type="number" id="missedCalls" value="5" min="0"
+          <label for="missedCalls" style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 10px;">Missed Calls Per Week</label>
+          <input type="number" id="missedCalls" value="5" min="0" aria-label="Number of missed calls per week"
             style="width: 100%; background: var(--near-black); border: 1px solid var(--border); color: var(--white); font-family: var(--mono); font-size: 18px; padding: 14px 16px; outline: none;">
         </div>
       </div>
       <div style="background: var(--near-black); border: 1px solid var(--border); border-left: 3px solid var(--accent); padding: 24px 28px;">
         <div style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px;">Estimated Monthly Revenue Loss</div>
-        <div id="calcResult" style="font-family: var(--display); font-size: 52px; color: var(--accent); line-height: 1;">$5,400</div>
-        <div style="font-family: var(--mono); font-size: 11px; color: var(--muted); margin-top: 8px;">(Based on ~60% conversion rate for answered calls)</div>
+        <div id="calcResult" style="font-family: var(--display); font-size: 52px; color: var(--accent); line-height: 1;" aria-live="polite">$5,400</div>
+        <div style="font-family: var(--mono); font-size: 11px; color: var(--muted); margin-top: 8px;">(Based on ~60% conversion rate for answered calls — adjust inputs to match your situation)</div>
       </div>
       <div style="margin-top: 24px; text-align: center;">
         <a href="#book" class="btn">Book a Call to Verify This Number</a>
@@ -534,7 +584,7 @@
       We'll use your real numbers to estimate what missed calls are costing you — and confirm whether a first-response capture system makes financial sense for your volume.
     </p>
 
-    <div style="background: var(--black); border: 1px solid var(--border); padding: 22px 22px; margin: 26px 0 34px;">
+    <div style="background: var(--black); border: 1px solid var(--border); padding: 22px; margin: 26px 0 34px;">
       <div style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px;">
         What to have ready (optional)
       </div>
@@ -554,10 +604,12 @@
          data-url="https://calendly.com/jrzconsultingsolutions/15-minute-call"
          style="min-width:320px;height:850px;">
     </div>
-    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
     <!-- Calendly inline widget end -->
 
-    <p style="margin-top: 18px; font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0.06em;">
+    <p style="margin-top: 24px; font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0.06em;">
+      After booking, you'll receive a calendar invite and a confirmation email with call details.
+    </p>
+    <p style="margin-top: 8px; font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0.06em;">
       15 minutes. No sales presentation. Just your numbers.
     </p>
   </div>
@@ -576,7 +628,7 @@
 
     <div class="faq-item">
       <p class="faq-q">I already have voicemail. Why isn't that enough?</p>
-      <p class="faq-a">Voicemail requires the caller to leave a message. Most people in an emergency don't — they hang up and call the next option. The First-Response Capture System keeps the caller engaged, gathers their details, and notifies you immediately. You can call back within minutes, before they've already booked someone else.</p>
+      <p class="faq-a">Voicemail requires the caller to leave a message. Most people in an emergency don't — they hang up and call the next option. The First-Response Capture System keeps the caller engaged, gathers their details, and notifies you promptly. You can call back quickly, before they've already booked someone else.</p>
     </div>
 
     <div class="faq-item">
@@ -586,7 +638,7 @@
 
     <div class="faq-item">
       <p class="faq-q">How long does setup take?</p>
-      <p class="faq-a">Most businesses are live within 3 to 5 business days. You complete a 10-minute intake form on Day 1. We handle the rest. You do not need to change your phone number, install any hardware, or set aside time for a technical process. You review and approve before it goes live.</p>
+      <p class="faq-a">Most businesses are live within 3 to 5 business days. You complete a short intake form at the start. We handle the rest. You do not need to change your phone number, install any hardware, or set aside time for a technical process. You review and approve before it goes live.</p>
     </div>
 
     <div class="faq-item">
@@ -601,29 +653,61 @@
 
     <div class="faq-item">
       <p class="faq-q">What if I want to cancel?</p>
-      <p class="faq-a">Month-to-month agreements are standard. We do not lock clients into long contracts because a system that's working pays for itself quickly. If you want to leave, you can. We will cover the full terms on the call.</p>
+      <p class="faq-a">Month-to-month agreements are standard. We do not lock clients into long contracts because a system that's working pays for itself. If you want to leave, you can. We will cover the full terms on the call.</p>
     </div>
   </div>
 </section>
 
 <!-- FINAL CTA -->
-<section style="text-align:center; padding: 80px 0; border-bottom: none;">
+<section style="text-align:center; padding: 80px 0; border-bottom: 1px solid var(--border);">
   <div class="container">
     <span class="label" style="display:block; text-align:center;">One last thing</span>
     <h2>EVERY CALL YOU MISS THIS WEEK IS WORTH AN AVERAGE OF $450. HOW MANY DID YOU MISS?</h2>
     <p style="max-width: 500px; margin: 0 auto 36px;">15 minutes to find out your number. No obligation after.</p>
-    <a href="#book" class="btn">Book a Free 15-Minute Call</a>
+    <a href="#book" class="btn">Book Your Free 15-Minute Revenue Estimate Call</a>
+  </div>
+</section>
+
+<!-- PRIVACY & TERMS (minimal, on-page) -->
+<section id="privacy" class="legal-section">
+  <div class="container">
+    <h3>Privacy Policy</h3>
+    <p>JRZ Consulting Solutions collects only the information you voluntarily provide when booking a call through Calendly: your name, phone number, and email address. This information is used solely to schedule and conduct your consultation call. We access this booking information only to schedule and conduct your consultation call.</p>
+    <p>We do not sell, share, or distribute your personal information to third parties. Calendly's own privacy policy governs data collected through their booking platform.</p>
+    <p>Questions? Contact us at jrzconsultingsolutions@gmail.com.</p>
+  </div>
+</section>
+
+<section id="terms" class="legal-section">
+  <div class="container">
+    <h3>Terms of Service</h3>
+    <p>Services provided by JRZ Consulting Solutions are offered on a month-to-month basis unless otherwise agreed in writing. No long-term contract is required.</p>
+    <p>Results vary by business. We do not guarantee specific revenue outcomes. The revenue estimates provided during consultations are illustrative and based on information you provide — actual results depend on your call volume, conversion rates, and business operations.</p>
+    <p>The client is solely responsible for all business decisions and operations. JRZ Consulting Solutions provides a call capture and notification service only.</p>
+    <p>Questions? Contact us at jrzconsultingsolutions@gmail.com.</p>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <div class="container">
-    <p>The First-Response Capture System</p>
-    <p>24/7 Call Capture for Emergency Trade Businesses</p>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <p>JRZ Consulting Solutions</p>
+        <p>jrzconsultingsolutions@gmail.com</p>
+      </div>
+      <div class="footer-links">
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#terms">Terms</a>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      This site does not provide legal or emergency services. For immediate emergencies, call local emergency services.
+    </div>
   </div>
 </footer>
 
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script>
   // Live calculator
   function updateCalc() {
