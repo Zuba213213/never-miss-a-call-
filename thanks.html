@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booked — Revenue Estimate Confirmed</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --near-black: #111111;
+      --dark: #1a1a1a;
+      --mid: #2d2d2d;
+      --border: #2a2a2a;
+      --muted: #6b6b6b;
+      --light: #c8c8c8;
+      --white: #f5f3ee;
+      --accent: #e8442a;
+      --accent-dim: #b53520;
+      --green: #2db37c;
+      --mono: 'DM Mono', monospace;
+      --sans: 'DM Sans', sans-serif;
+      --display: 'Bebas Neue', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 860px; margin: 0 auto; padding: 0 32px; }
+
+    nav {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+    }
+    nav .container { display: flex; align-items: center; justify-content: space-between; }
+    .nav-brand { font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+    section { padding: 96px 0; border-bottom: 1px solid var(--border); }
+
+    .label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    h1 {
+      font-family: var(--display);
+      font-size: clamp(44px, 7vw, 78px);
+      line-height: 0.95;
+      letter-spacing: 0.01em;
+      margin-bottom: 18px;
+      color: var(--white);
+    }
+
+    h2 {
+      font-family: var(--display);
+      font-size: clamp(30px, 4.5vw, 48px);
+      line-height: 1.0;
+      letter-spacing: 0.01em;
+      margin-bottom: 16px;
+      color: var(--white);
+    }
+
+    p { color: var(--light); margin-bottom: 16px; }
+    p:last-child { margin-bottom: 0; }
+
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 16px 34px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s ease, transform 0.1s ease;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    }
+    .btn:hover { background: var(--accent-dim); transform: translateY(-1px); }
+
+    .btn-ghost {
+      display: inline-block;
+      background: transparent;
+      color: var(--light);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 14px 20px;
+      transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+    }
+    .btn-ghost:hover { border-color: var(--muted); background: var(--mid); color: var(--white); }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -220px;
+      right: -220px;
+      width: 640px;
+      height: 640px;
+      background: radial-gradient(circle, rgba(232,68,42,0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--light);
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      background: rgba(17,17,17,0.7);
+      margin: 24px 0 28px;
+      width: fit-content;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--green);
+      box-shadow: 0 0 0 4px rgba(45,179,124,0.12);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 28px;
+    }
+    .card {
+      background: var(--near-black);
+      border: 1px solid var(--border);
+      padding: 22px 22px;
+    }
+    .card h3 {
+      font-family: var(--sans);
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--white);
+    }
+    .card p, .card li { font-size: 15px; color: var(--light); }
+    .card ul { margin: 10px 0 0 18px; }
+    .card li { margin: 6px 0; }
+
+    .divider-note {
+      margin-top: 28px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    footer {
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+    }
+    footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    footer p {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      margin: 0;
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 720px) {
+      .container { padding: 0 20px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { opacity: 0; animation: fadeUp 0.6s ease forwards; }
+    .fade-up:nth-child(1) { animation-delay: 0.08s; }
+    .fade-up:nth-child(2) { animation-delay: 0.18s; }
+    .fade-up:nth-child(3) { animation-delay: 0.28s; }
+    .fade-up:nth-child(4) { animation-delay: 0.38s; }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="container">
+      <span class="nav-brand">First-Response Capture System</span>
+      <a class="btn-ghost" href="./index.html">Back to Page</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="label fade-up">Appointment Confirmed</span>
+      <h1 class="fade-up">YOU’RE BOOKED.</h1>
+      <h2 class="fade-up" style="margin-top: 10px;">Here’s how to get the most value in 15 minutes.</h2>
+
+      <div class="status fade-up">
+        <span class="dot"></span>
+        <span>Revenue Estimate Scheduled</span>
+      </div>
+
+      <p class="fade-up" style="max-width: 640px;">
+        This call is not a sales presentation. We’ll use your real numbers to estimate how much revenue is leaking through missed calls
+        — and whether a first-response system makes sense for your volume.
+      </p>
+
+      <div class="grid">
+        <div class="card fade-up">
+          <h3>What to have ready</h3>
+          <ul>
+            <li>Average job value (rough is fine)</li>
+            <li>Estimated inbound calls per week</li>
+            <li>When you miss calls (after-hours, peak hours, weekends)</li>
+            <li>Your current phone setup (voicemail, dispatcher, answering service)</li>
+          </ul>
+          <p class="divider-note">If you’re not sure, we’ll estimate it together.</p>
+        </div>
+
+        <div class="card fade-up">
+          <h3>What we’ll do on the call</h3>
+          <ul>
+            <li>Calculate your estimated monthly missed-call loss</li>
+            <li>Identify your highest-leak time windows</li>
+            <li>Confirm if you meet the “math threshold” for ROI</li>
+            <li>If it fits: outline a simple 3–5 day go-live plan</li>
+          </ul>
+          <p class="divider-note">You’ll leave with a number either way.</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 34px;" class="fade-up">
+        <a class="btn" href="./index.html#calculator">Run the Calculator Again</a>
+        <a class="btn-ghost" style="margin-left: 10px;" href="./index.html#book">Reschedule / View Booking</a>
+      </div>
+
+      <p class="divider-note fade-up" style="margin-top: 22px;">
+        If you need to change the time, use the reschedule link in your calendar invite.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>The First-Response Capture System</p>
+      <p>24/7 Call Capture for Emergency Trade Businesses</p>
+    </div>
+  </footer>
+
+  <script>
+    // Optional: if you pass ?name=Joey in a redirect URL, it can greet the user.
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const name = params.get("name");
+      if (!name) return;
+
+      const h1 = document.querySelector("h1");
+      if (!h1) return;
+
+      // Keep it subtle (no hype).
+      h1.textContent = `YOU’RE BOOKED, ${name.toUpperCase()}.`;
+    })();
+  </script>
+</body>
+</html>
