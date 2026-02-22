@@ -26,7 +26,9 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
   <!-- Meta Pixel Code -->
-  <script>
+  <!-- data-cfasync="false" prevents Cloudflare Rocket Loader from deferring -->
+  <!-- this script, which would cause the pixel to fire late or not at all.  -->
+  <script data-cfasync="false">
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -48,7 +50,9 @@
   <!-- End Meta Pixel Code -->
 
   <!-- Calendly booking conversion: fire Lead event when booking is confirmed -->
-  <script>
+  <!-- data-cfasync="false" ensures this listener registers immediately,      -->
+  <!-- not deferred by Cloudflare Rocket Loader.                              -->
+  <script data-cfasync="false">
     window.addEventListener('message', function(e) {
       if (!e.data) return;
 
