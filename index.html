@@ -13,14 +13,23 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '1268426745197866');
 fbq('track', 'PageView');
+fbq('track', 'ViewContent');
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1268426745197866&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-  <script>
+<script>
 window.addEventListener("message", function(e) {
-  if (e.data.event && e.data.event.indexOf("calendly.event_scheduled") === 0) {
+  // Calendly sends postMessage events from calendly.com
+  if (typeof e.data === "string") {
+    if (e.data.indexOf("calendly.event_scheduled") !== -1) {
+      fbq('track', 'Lead');
+    }
+    return;
+  }
+
+  if (e.data && e.data.event && String(e.data.event).indexOf("calendly.event_scheduled") !== -1) {
     fbq('track', 'Lead');
   }
 });
