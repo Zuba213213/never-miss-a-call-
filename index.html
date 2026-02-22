@@ -1,65 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- charset MUST be first element in head, before any scripts -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Never Miss Another Call — The First-Response Capture System</title>
+
+  <!-- SEO & Sharing Meta -->
+  <meta name="description" content="A 24/7 call capture system for HVAC, plumbing, electrical, roofing, and restoration businesses. Stop losing jobs to unanswered calls.">
+  <meta property="og:title" content="Never Miss Another Call — The First-Response Capture System">
+  <meta property="og:description" content="When you can't answer, your phone still does. Every missed call captured, every job detail collected, instant notification to you. Live in under a week.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jrzconsultingsolutions.com">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Never Miss Another Call — The First-Response Capture System">
+  <meta name="twitter:description" content="A 24/7 call capture system for emergency trade businesses. Stop losing jobs to unanswered calls.">
+  <meta property="og:image" content="https://jrzconsultingsolutions.com/og-image.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <link rel="canonical" href="https://jrzconsultingsolutions.com/">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
   <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1268426745197866');
-fbq('track', 'PageView');
-fbq('track', 'ViewContent');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1268426745197866&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-<script>
-window.addEventListener("message", function(e) {
-  // Calendly sends postMessage events from calendly.com
-  if (typeof e.data === "string") {
-    if (e.data.indexOf("calendly.event_scheduled") !== -1) {
-      fbq('track', 'Lead');
-    }
-    return;
-  }
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1268426745197866');
+    fbq('track', 'PageView');
+    // NOTE: ViewContent removed — it was firing on every pageload alongside
+    // PageView, polluting pixel data and degrading ad optimization signals.
+    // Re-add only if you intentionally want a separate ViewContent event.
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1268426745197866&ev=PageView&noscript=1" />
+  </noscript>
+  <!-- End Meta Pixel Code -->
 
-  if (e.data && e.data.event && String(e.data.event).indexOf("calendly.event_scheduled") !== -1) {
-    fbq('track', 'Lead');
-  }
-});
-</script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Never Miss Another Call — The First-Response Capture System</title>
+  <!-- Calendly booking conversion: fire Lead event when booking is confirmed -->
+  <script>
+    window.addEventListener('message', function(e) {
+      if (!e.data) return;
 
-<!-- SEO & Sharing Meta -->
-<meta name="description" content="A 24/7 call capture system for HVAC, plumbing, electrical, roofing, and restoration businesses. Stop losing jobs to unanswered calls.">
-<meta property="og:title" content="Never Miss Another Call — The First-Response Capture System">
-<meta property="og:description" content="When you can't answer, your phone still does. Every missed call captured, every job detail collected, instant notification to you. Live in under a week.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://jrzconsultingsolutions.com">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Never Miss Another Call — The First-Response Capture System">
-<meta name="twitter:description" content="A 24/7 call capture system for emergency trade businesses. Stop losing jobs to unanswered calls.">
-<meta property="og:image" content="https://jrzconsultingsolutions.com/og-image.jpg">
-<meta property="og:image:type" content="image/jpeg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+      var eventName = '';
 
-<link rel="canonical" href="https://jrzconsultingsolutions.com/">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      // Calendly sends event data as either a plain string or an object.
+      // Handle both formats for full compatibility.
+      if (typeof e.data === 'string') {
+        eventName = e.data;
+      } else if (typeof e.data === 'object' && e.data.event) {
+        eventName = String(e.data.event);
+      }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+      if (eventName.indexOf('calendly.event_scheduled') !== -1) {
+        fbq('track', 'Lead');
+      }
+    });
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
   :root {
     --black: #0a0a0a;
@@ -782,7 +794,10 @@ window.addEventListener("message", function(e) {
   </div>
 </footer>
 
+<!-- Calendly widget — loaded async, does not block page render -->
 <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+<!-- Calculator -->
 <script>
   function updateCalc() {
     var jobVal = parseFloat(document.getElementById('jobValue').value) || 0;
@@ -793,5 +808,6 @@ window.addEventListener("message", function(e) {
   document.getElementById('jobValue').addEventListener('input', updateCalc);
   document.getElementById('missedCalls').addEventListener('input', updateCalc);
 </script>
+
 </body>
 </html>
