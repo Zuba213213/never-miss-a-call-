@@ -18,6 +18,13 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=1268426745197866&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+  <script>
+window.addEventListener("message", function(e) {
+  if (e.data.event && e.data.event.indexOf("calendly.event_scheduled") === 0) {
+    fbq('track', 'Lead');
+  }
+});
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Never Miss Another Call — The First-Response Capture System</title>
