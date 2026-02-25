@@ -26,8 +26,6 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
   <!-- Meta Pixel Code -->
-  <!-- data-cfasync="false" prevents Cloudflare Rocket Loader from deferring -->
-  <!-- this script, which would cause the pixel to fire late or not at all.  -->
   <script data-cfasync="false">
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -39,9 +37,6 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '1268426745197866');
     fbq('track', 'PageView');
-    // NOTE: ViewContent removed — it was firing on every pageload alongside
-    // PageView, polluting pixel data and degrading ad optimization signals.
-    // Re-add only if you intentionally want a separate ViewContent event.
   </script>
   <noscript>
     <img height="1" width="1" style="display:none"
@@ -50,22 +45,15 @@
   <!-- End Meta Pixel Code -->
 
   <!-- Calendly booking conversion: fire Lead event when booking is confirmed -->
-  <!-- data-cfasync="false" ensures this listener registers immediately,      -->
-  <!-- not deferred by Cloudflare Rocket Loader.                              -->
   <script data-cfasync="false">
     window.addEventListener('message', function(e) {
       if (!e.data) return;
-
       var eventName = '';
-
-      // Calendly sends event data as either a plain string or an object.
-      // Handle both formats for full compatibility.
       if (typeof e.data === 'string') {
         eventName = e.data;
       } else if (typeof e.data === 'object' && e.data.event) {
         eventName = String(e.data.event);
       }
-
       if (eventName.indexOf('calendly.event_scheduled') !== -1) {
         fbq('track', 'Lead');
       }
@@ -153,11 +141,7 @@
     clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
   }
   .btn:hover { background: var(--accent-dim); transform: translateY(-1px); }
-  .btn:focus-visible {
-    outline: 2px solid var(--white);
-    outline-offset: 4px;
-    background: var(--accent-dim);
-  }
+  .btn:focus-visible { outline: 2px solid var(--white); outline-offset: 4px; background: var(--accent-dim); }
   .btn-secondary {
     display: inline-block;
     background: transparent;
@@ -168,10 +152,8 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     text-decoration: none;
-    padding: 0;
-    border: none;
-    border-bottom: 1px solid var(--border);
     padding-bottom: 2px;
+    border-bottom: 1px solid var(--border);
     cursor: pointer;
     transition: color 0.15s ease, border-color 0.15s ease;
     margin-top: 20px;
@@ -211,6 +193,7 @@
   .hero-sub { font-size: 19px; color: var(--light); max-width: 560px; margin-bottom: 40px; line-height: 1.6; }
   .hero-cta-group { display: flex; flex-direction: column; align-items: flex-start; gap: 0; }
   .hero-meta { margin-top: 24px; font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0.06em; }
+  .hero-social-proof { margin-top: 28px; font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.07em; }
 
   /* TICKER */
   .ticker { background: var(--accent); padding: 12px 0; overflow: hidden; white-space: nowrap; }
@@ -237,6 +220,45 @@
     color: var(--accent); font-size: 17px; font-weight: 500;
     border-top: 1px solid var(--border); padding-top: 14px; margin-top: 8px;
   }
+
+  /* DEMO CALL */
+  #demo-call {
+    padding: 64px 0;
+    background: var(--near-black);
+    border-bottom: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+  }
+  .demo-call-inner { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+  .demo-call-icon {
+    flex-shrink: 0;
+    width: 64px; height: 64px;
+    border: 1px solid var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+  }
+  .demo-call-content { flex: 1; min-width: 220px; }
+  .demo-call-number {
+    font-family: var(--display);
+    font-size: clamp(36px, 5vw, 52px);
+    letter-spacing: 0.03em;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .demo-call-number a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent-dim);
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .demo-call-number a:hover { color: var(--white); border-color: var(--muted); }
+  .demo-call-desc { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0.06em; margin: 0; }
+  @media (max-width: 600px) { .demo-call-inner { flex-direction: column; gap: 20px; } }
+
+  /* HOW IT WORKS */
+  .steps { margin-top: 40px; }
+  .step { display: grid; grid-template-columns: 56px 1fr; gap: 24px; padding: 32px 0; border-bottom: 1px solid var(--border); align-items: start; }
+  .step:last-child { border-bottom: none; }
+  .step-num { font-family: var(--display); font-size: 48px; color: var(--accent); line-height: 1; padding-top: 4px; }
 
   /* SOLUTION */
   .mechanism-name {
@@ -265,12 +287,6 @@
   .not-for { background: var(--near-black); border: 1px solid var(--border); padding: 24px 28px; margin-top: 16px; }
   .not-for .label { margin-bottom: 12px; }
 
-  /* HOW IT WORKS */
-  .steps { counter-reset: steps; margin-top: 40px; }
-  .step { display: grid; grid-template-columns: 56px 1fr; gap: 24px; padding: 32px 0; border-bottom: 1px solid var(--border); align-items: start; }
-  .step:last-child { border-bottom: none; }
-  .step-num { font-family: var(--display); font-size: 48px; color: var(--accent); line-height: 1; padding-top: 4px; }
-
   /* VALUE STACK */
   #value-stack { background: var(--near-black); }
   .stack-table { width: 100%; border-collapse: collapse; margin: 32px 0 0; }
@@ -282,12 +298,9 @@
   .stack-table td { padding: 16px; border-bottom: 1px solid var(--border); font-size: 15px; color: var(--light); vertical-align: top; }
   .stack-table tr:last-child td { border-bottom: none; }
   .stack-table td:first-child { color: var(--white); font-weight: 500; width: 36%; }
-  .stack-table td:last-child {
-    font-family: var(--mono); font-size: 12px; color: var(--green);
-    text-align: right; white-space: nowrap; width: 90px;
-  }
+  .stack-table td:last-child { font-family: var(--mono); font-size: 12px; color: var(--green); text-align: right; white-space: nowrap; width: 90px; }
 
-  /* RISK REVERSAL */
+  /* RISK BOX */
   .risk-box {
     background: var(--dark);
     border: 1px solid var(--border);
@@ -298,41 +311,24 @@
   .risk-box .risk-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; display: block; }
   .risk-box p { color: var(--light); font-size: 15px; }
 
-  /* CTA */
-  #cta { text-align: center; padding: 96px 0; }
-  #cta h2 { margin-bottom: 16px; }
-  #cta p { max-width: 500px; margin: 0 auto 16px; }
-  .cta-inner { display: flex; flex-direction: column; align-items: center; }
-  .cta-note { margin-top: 20px; font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0.06em; }
-
   /* FAQ */
   .faq-item { border-bottom: 1px solid var(--border); padding: 32px 0; }
   .faq-q { font-size: 18px; font-weight: 600; color: var(--white); margin-bottom: 14px; }
   .faq-a { color: var(--light); max-width: 680px; }
 
+  /* BOOK */
+  #book { background: var(--near-black); }
+
   /* FOOTER */
   footer { padding: 40px 0 0; border-top: 1px solid var(--border); }
-  .footer-main {
-    display: flex; justify-content: space-between; align-items: flex-start;
-    flex-wrap: wrap; gap: 16px; padding-bottom: 24px;
-    border-bottom: 1px solid var(--border);
-  }
+  .footer-main { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
   .footer-brand p { font-family: var(--mono); font-size: 11px; color: var(--muted); margin: 0 0 4px; letter-spacing: 0.06em; }
   .footer-links { display: flex; gap: 20px; align-items: center; }
-  .footer-links a {
-    font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.08em;
-    text-decoration: none; text-transform: uppercase;
-    border-bottom: 1px solid transparent;
-    transition: color 0.15s, border-color 0.15s;
-  }
+  .footer-links a { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.08em; text-decoration: none; text-transform: uppercase; border-bottom: 1px solid transparent; transition: color 0.15s, border-color 0.15s; }
   .footer-links a:hover { color: var(--light); border-color: var(--border); }
-  .footer-disclaimer {
-    padding: 16px 0 28px;
-    font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.04em;
-    line-height: 1.7;
-  }
+  .footer-disclaimer { padding: 16px 0 28px; font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.04em; line-height: 1.7; }
 
-  /* LEGAL SECTIONS */
+  /* LEGAL */
   .legal-section { padding: 56px 0; border-bottom: 1px solid var(--border); }
   .legal-section h3 { font-size: 16px; margin-bottom: 16px; }
   .legal-section p { font-size: 14px; color: var(--muted); margin-bottom: 10px; }
@@ -357,9 +353,7 @@
     .container { padding: 0 20px; }
     .math-block { padding: 20px; }
     .footer-main { flex-direction: column; }
-    #calculator div[style*="grid-template-columns"] {
-      grid-template-columns: 1fr !important;
-    }
+    #calculator div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
   }
 </style>
 </head>
@@ -373,7 +367,9 @@
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- ─────────────────────────────────────────
+  1. HERO — Hook + immediate CTA
+───────────────────────────────────────── -->
 <section id="hero">
   <div class="container">
     <span class="label">For HVAC &middot; Plumbing &middot; Electrical &middot; Roofing &middot; Restoration</span>
@@ -389,6 +385,7 @@
       <a href="#calculator" class="btn-secondary">Run the numbers yourself &rarr;</a>
     </div>
     <p class="hero-meta fade-up">15 minutes. We'll estimate your missed-call leakage and show the system live.</p>
+    <p class="hero-social-proof">&#9632; Currently handling missed calls for trade businesses in DFW &mdash; pilot program open.</p>
   </div>
 </section>
 
@@ -399,7 +396,9 @@
   </span>
 </div>
 
-<!-- PROBLEM -->
+<!-- ─────────────────────────────────────────
+  2. PROBLEM — Agitate the pain, put a number on it
+───────────────────────────────────────── -->
 <section id="problem">
   <div class="container">
     <span class="label">The Problem</span>
@@ -423,92 +422,29 @@
   </div>
 </section>
 
-<!-- SOLUTION -->
-<section id="solution">
+<!-- ─────────────────────────────────────────
+  3. LIVE DEMO — Hear the fix right now, while pain is fresh
+───────────────────────────────────────── -->
+<section id="demo-call">
   <div class="container">
-    <span class="label">The Solution</span>
-    <div class="mechanism-name">The First-Response Capture System</div>
-
-    <p>Most emergency callers move on fast &mdash; often within minutes. The First-Response Capture System picks up before that window closes. It handles the call the way a trained dispatcher would: asking the right questions, gathering the job details you need, and sending you an alert promptly. You get the information. You decide what to do next.</p>
-
-    <div class="feature-grid">
-      <div class="feature-item">
-        <span class="feature-num">01</span>
-        <h3>Answers Every Missed Call</h3>
-        <p>When you're unavailable, the system picks up before the caller hangs up and moves on. They get a response &mdash; not a voicemail prompt.</p>
+    <span class="label">Live Demo</span>
+    <h2>HEAR IT YOURSELF &mdash; CALL THE DEMO</h2>
+    <div class="demo-call-inner">
+      <div class="demo-call-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l.92-.85a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"/></svg>
       </div>
-      <div class="feature-item">
-        <span class="feature-num">02</span>
-        <h3>Collects Structured Job Details</h3>
-        <p>Name, address, issue type, urgency level &mdash; gathered consistently on every call. The information you actually need to dispatch or call back.</p>
-      </div>
-      <div class="feature-item">
-        <span class="feature-num">03</span>
-        <h3>Sends You a Fast Notification</h3>
-        <p>You receive a text or email with the caller's full details shortly after the call is handled. Call back quickly &mdash; before they've moved on to the next option.</p>
-      </div>
-      <div class="feature-item">
-        <span class="feature-num">04</span>
-        <h3>Optional Appointment Booking</h3>
-        <p>For non-emergency calls, the system books directly into your calendar. No callback needed. No phone tag.</p>
+      <div class="demo-call-content">
+        <div class="demo-call-number"><a href="tel:+12143820521">(214) 382-0521</a></div>
+        <p class="demo-call-desc">This is a live AI agent handling a missed call for a roofing company. This is what your callers will hear.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PROOF: EXAMPLE CALL SUMMARY -->
-<section id="proof">
-  <div class="container">
-    <span class="label">Proof</span>
-    <h2>HERE'S WHAT YOU RECEIVE AFTER A MISSED CALL.</h2>
-
-    <p>When a call is missed, the system asks a few quick questions and texts you a clean summary within seconds:</p>
-
-    <div class="math-block" style="line-height: 1.9;">
-      <div style="color: var(--white); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">New Missed Call Lead</div>
-      <div><span style="color: var(--muted); display: inline-block; width: 160px;">Name:</span> John M.</div>
-      <div><span style="color: var(--muted); display: inline-block; width: 160px;">Trade:</span> HVAC</div>
-      <div><span style="color: var(--muted); display: inline-block; width: 160px;">Issue:</span> No heat</div>
-      <div><span style="color: var(--muted); display: inline-block; width: 160px;">Location:</span> Plano, TX</div>
-      <div><span style="color: var(--muted); display: inline-block; width: 160px;">Urgency:</span> Emergency / Today</div>
-      <div><span style="color: var(--muted); display: inline-block; width: 160px;">Best callback time:</span> Now</div>
-      <div><span style="color: var(--muted); display: inline-block; width: 160px;">Phone:</span> (469) XXX-XXXX</div>
-    </div>
-
-    <p style="font-family: var(--mono); font-size: 13px; color: var(--muted); letter-spacing: 0.04em;">No app. No logins. Just the details you need to call back fast and book the job.</p>
-  </div>
-</section>
-
-<!-- WHO IT'S FOR -->
-<section id="who">
-  <div class="container">
-    <span class="label">Who This Is For</span>
-    <h2>BUILT FOR TRADES THAT RUN ON EMERGENCY CALLS.</h2>
-
-    <p>This system is designed for businesses where a missed call during peak hours or after hours has a direct dollar value attached to it.</p>
-
-    <div class="trade-list">
-      <span class="trade-tag">HVAC</span>
-      <span class="trade-tag">Plumbing</span>
-      <span class="trade-tag">Electrical</span>
-      <span class="trade-tag">Roofing</span>
-      <span class="trade-tag">Water &amp; Fire Restoration</span>
-      <span class="trade-tag">Drain &amp; Sewer</span>
-      <span class="trade-tag">Appliance Repair</span>
-    </div>
-
-    <div class="threshold-box">
-      <p>This system makes financial sense when your average job value is $300 or more and you receive at least 15 inbound calls per week. Below that volume, the math may not justify the investment &mdash; and if that's the case, we will tell you that on the call before any next step is discussed. We do not take on businesses where the numbers don't work.</p>
-    </div>
-
-    <div class="not-for">
-      <span class="label">This is NOT for you if</span>
-      <p>Your business does not rely on inbound phone calls. You already have a fully staffed dispatch team handling all calls during and after business hours. You are primarily appointment-based with no emergency component. There is no gap in your current call handling.</p>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
+<!-- ─────────────────────────────────────────
+  4. HOW IT WORKS — Simple 3-step mechanism
+  They heard it. Now understand exactly how it runs.
+───────────────────────────────────────── -->
 <section id="how">
   <div class="container">
     <span class="label">How It Works</span>
@@ -540,7 +476,104 @@
   </div>
 </section>
 
-<!-- VALUE STACK -->
+<!-- ─────────────────────────────────────────
+  5. PROOF — Show the actual deliverable
+  They know how it works. Now see exactly what lands in their pocket.
+───────────────────────────────────────── -->
+<section id="proof">
+  <div class="container">
+    <span class="label">What You Receive</span>
+    <h2>HERE'S WHAT YOU GET AFTER A MISSED CALL.</h2>
+
+    <p>When a call is missed, the system asks a few quick questions and texts you a clean summary within seconds:</p>
+
+    <div class="math-block" style="line-height: 1.9;">
+      <div style="color: var(--white); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">New Missed Call Lead</div>
+      <div><span style="color: var(--muted); display: inline-block; width: 160px;">Name:</span> John M.</div>
+      <div><span style="color: var(--muted); display: inline-block; width: 160px;">Trade:</span> HVAC</div>
+      <div><span style="color: var(--muted); display: inline-block; width: 160px;">Issue:</span> No heat</div>
+      <div><span style="color: var(--muted); display: inline-block; width: 160px;">Location:</span> Plano, TX</div>
+      <div><span style="color: var(--muted); display: inline-block; width: 160px;">Urgency:</span> Emergency / Today</div>
+      <div><span style="color: var(--muted); display: inline-block; width: 160px;">Best callback time:</span> Now</div>
+      <div><span style="color: var(--muted); display: inline-block; width: 160px;">Phone:</span> (469) XXX-XXXX</div>
+    </div>
+
+    <p style="font-family: var(--mono); font-size: 13px; color: var(--muted); letter-spacing: 0.04em;">No app. No logins. Just the details you need to call back fast and book the job.</p>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────
+  6. SOLUTION — Full system breakdown
+  Seen the output. Now understand what's powering it.
+───────────────────────────────────────── -->
+<section id="solution">
+  <div class="container">
+    <span class="label">The Solution</span>
+    <div class="mechanism-name">The First-Response Capture System</div>
+
+    <p>Most emergency callers move on fast &mdash; often within minutes. The First-Response Capture System picks up before that window closes. It handles the call the way a trained dispatcher would: asking the right questions, gathering the job details you need, and sending you an alert promptly. You get the information. You decide what to do next.</p>
+
+    <div class="feature-grid">
+      <div class="feature-item">
+        <span class="feature-num">01</span>
+        <h3>Answers Every Missed Call</h3>
+        <p>When you're unavailable, the system picks up before the caller hangs up and moves on. They get a response &mdash; not a voicemail prompt.</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-num">02</span>
+        <h3>Collects Structured Job Details</h3>
+        <p>Name, address, issue type, urgency level &mdash; gathered consistently on every call. The information you actually need to dispatch or call back.</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-num">03</span>
+        <h3>Sends You a Fast Notification</h3>
+        <p>You receive a text or email with the caller's full details shortly after the call is handled. Call back quickly &mdash; before they've moved on to the next option.</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-num">04</span>
+        <h3>Runs Without Your Involvement</h3>
+        <p>Once live, it operates in the background. No logins, no dashboards to check, no manual steps. It handles the calls and sends you what you need.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────
+  7. WHO IT'S FOR — Qualify and disqualify
+  Good fits lean in. Bad fits exit early. Both outcomes are good.
+───────────────────────────────────────── -->
+<section id="who">
+  <div class="container">
+    <span class="label">Who This Is For</span>
+    <h2>BUILT FOR TRADES THAT RUN ON EMERGENCY CALLS.</h2>
+
+    <p>This system is designed for businesses where a missed call during peak hours or after hours has a direct dollar value attached to it.</p>
+
+    <div class="trade-list">
+      <span class="trade-tag">HVAC</span>
+      <span class="trade-tag">Plumbing</span>
+      <span class="trade-tag">Electrical</span>
+      <span class="trade-tag">Roofing</span>
+      <span class="trade-tag">Water &amp; Fire Restoration</span>
+      <span class="trade-tag">Drain &amp; Sewer</span>
+      <span class="trade-tag">Appliance Repair</span>
+    </div>
+
+    <div class="threshold-box">
+      <p>This system makes financial sense when your average job value is $300 or more and you receive at least 15 inbound calls per week. Below that volume, the math may not justify the investment &mdash; and if that's the case, we will tell you that on the call before any next step is discussed. We do not take on businesses where the numbers don't work.</p>
+    </div>
+
+    <div class="not-for">
+      <span class="label">This is NOT for you if</span>
+      <p>Your business does not rely on inbound phone calls. You already have a fully staffed dispatch team handling all calls during and after business hours. You are primarily appointment-based with no emergency component. There is no gap in your current call handling.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────
+  8. VALUE STACK — Everything included + guarantee
+  Qualified visitors now see full scope and zero risk.
+───────────────────────────────────────── -->
 <section id="value-stack">
   <div class="container">
     <span class="label">What's Included</span>
@@ -572,11 +605,6 @@
           <td>Included</td>
         </tr>
         <tr>
-          <td>Appointment Booking</td>
-          <td>Non-emergency callers book directly into your calendar. No callback required.</td>
-          <td>Included</td>
-        </tr>
-        <tr>
           <td>Call Activity Log</td>
           <td>Review every call handled, what was collected, and what follow-up is pending.</td>
           <td>Included</td>
@@ -601,26 +629,15 @@
   </div>
 </section>
 
-<!-- CTA -->
-<section id="cta">
-  <div class="container">
-    <span class="label" style="text-align:center; display:block;">Get Started</span>
-    <h2>FIND OUT WHAT MISSED CALLS ARE COSTING YOU &mdash; IN 15 MINUTES.</h2>
-    <div class="cta-inner">
-      <p>On a free 15-minute call, we'll take your actual numbers &mdash; average job value, call volume, peak hours &mdash; and give you a specific estimate of what you're currently leaving on the table. You'll leave knowing the number whether you move forward with us or not.</p>
-      <p>No pressure. Just your numbers &mdash; and a live walkthrough of how the system works.</p>
-      <a href="#book" class="btn">Book a 15-Minute Call Audit</a>
-      <p class="cta-note">15 minutes. You'll have a specific number by the end of the call.</p>
-    </div>
-  </div>
-</section>
-
-<!-- CALCULATOR -->
-<section id="calculator" style="padding: 64px 0; background: var(--near-black);">
+<!-- ─────────────────────────────────────────
+  9. CALCULATOR — Make the cost of inaction personal
+  They're sold on the concept. Now attach their specific number.
+───────────────────────────────────────── -->
+<section id="calculator" style="padding: 80px 0; background: var(--dark);">
   <div class="container">
     <span class="label">Missed Call Calculator</span>
     <h2>RUN YOUR OWN NUMBERS.</h2>
-    <p>Not ready to talk? Use the fields below to estimate what missed calls are costing your business each month. Adjust the numbers to match your situation.</p>
+    <p>Use the fields below to estimate what missed calls are costing your business each month. Adjust to match your situation.</p>
 
     <div style="background: var(--black); border: 1px solid var(--border); padding: 36px; margin-top: 32px;">
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px;">
@@ -647,19 +664,56 @@
   </div>
 </section>
 
-<!-- FINANCIAL ANCHOR -->
-<section id="financial-anchor" style="padding: 96px 0; background: var(--dark);">
+<!-- ─────────────────────────────────────────
+  10. FAQ — Clear objections right before the ask
+  Last thing standing between a visitor and a booked call.
+───────────────────────────────────────── -->
+<section id="faq">
   <div class="container">
-    <span class="label">The Cost of Doing Nothing</span>
-    <h2>HOW MUCH ARE MISSED CALLS COSTING YOU?</h2>
-    <p>If your average job is $1,200 and you miss just 4 calls per month&hellip;</p>
-    <p>That's nearly $5,000 in lost revenue.</p>
-    <p style="color: var(--muted); font-family: var(--mono); font-size: 14px; margin-top: 8px;">Most teams miss more calls than they think &mdash; especially after hours.</p>
+    <span class="label">Common Questions</span>
+    <h2>STRAIGHT ANSWERS.</h2>
+
+    <div class="faq-item">
+      <p class="faq-q">Will customers know they're not talking to a person?</p>
+      <p class="faq-a">The agent handles calls professionally without volunteering upfront that it's AI &mdash; it focuses on helping the caller and collecting their information quickly. If a caller directly asks whether they're speaking with a person, the system will be transparent. In practice, callers in an emergency care most about getting a response. Being picked up beats going to voicemail every time.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">I already have voicemail. Why isn't that enough?</p>
+      <p class="faq-a">Voicemail requires the caller to leave a message. Most people in an emergency don't &mdash; they hang up and call the next option. The First-Response Capture System keeps the caller engaged, gathers their details, and notifies you promptly. You can call back quickly, before they've already booked someone else.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">I only miss calls occasionally. Is this worth it?</p>
+      <p class="faq-a">That depends on the value of those calls. Use the calculator above to run your own numbers. If it doesn't make financial sense for your volume, we'll tell you that directly on the call &mdash; before any next step is discussed.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">How long does setup take?</p>
+      <p class="faq-a">Most businesses are live within 3 to 5 business days. You complete a short intake form at the start. We handle the rest. You do not need to change your phone number, install any hardware, or set aside time for a technical process. You review and approve before it goes live.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">Does this replace my office staff or dispatcher?</p>
+      <p class="faq-a">No. This handles missed calls &mdash; the ones that currently get no response at all. If you have staff available, they answer first. The First-Response Capture System only activates when a call goes unanswered. It is a backup that runs when your team cannot get to it.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">What does it cost?</p>
+      <p class="faq-a">Pricing is based on your call volume and setup requirements. We do not quote before understanding your situation. We will cover it on the 15-minute call &mdash; after we have looked at your numbers together.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">What if I want to cancel?</p>
+      <p class="faq-a">Month-to-month agreements are standard. We do not lock clients into long contracts because a system that's working pays for itself. If you want to leave, you can. We will cover the full terms on the call.</p>
+    </div>
   </div>
 </section>
 
-<!-- BOOK -->
-<section id="book" style="padding: 96px 0; background: var(--near-black);">
+<!-- ─────────────────────────────────────────
+  11. BOOK — The conversion point. Calendly embed.
+───────────────────────────────────────── -->
+<section id="book">
   <div class="container">
     <span class="label">Schedule Your Call Audit</span>
     <h2>BOOK YOUR 15-MINUTE CALL AUDIT.</h2>
@@ -706,50 +760,9 @@
   </div>
 </section>
 
-<!-- FAQ -->
-<section id="faq">
-  <div class="container">
-    <span class="label">Common Questions</span>
-    <h2>STRAIGHT ANSWERS.</h2>
-
-    <div class="faq-item">
-      <p class="faq-q">Will customers know they're not talking to a person?</p>
-      <p class="faq-a">The system is transparent &mdash; it does not pretend to be a human dispatcher. It handles the call professionally and collects the information quickly. In practice, callers in an emergency care more about getting a response than who is responding. Being picked up beats going to voicemail every time.</p>
-    </div>
-
-    <div class="faq-item">
-      <p class="faq-q">I already have voicemail. Why isn't that enough?</p>
-      <p class="faq-a">Voicemail requires the caller to leave a message. Most people in an emergency don't &mdash; they hang up and call the next option. The First-Response Capture System keeps the caller engaged, gathers their details, and notifies you promptly. You can call back quickly, before they've already booked someone else.</p>
-    </div>
-
-    <div class="faq-item">
-      <p class="faq-q">I only miss calls occasionally. Is this worth it?</p>
-      <p class="faq-a">That depends on the value of those calls. Use the calculator above to run your own numbers. If it doesn't make financial sense for your volume, we'll tell you that directly on the call &mdash; before any next step is discussed.</p>
-    </div>
-
-    <div class="faq-item">
-      <p class="faq-q">How long does setup take?</p>
-      <p class="faq-a">Most businesses are live within 3 to 5 business days. You complete a short intake form at the start. We handle the rest. You do not need to change your phone number, install any hardware, or set aside time for a technical process. You review and approve before it goes live.</p>
-    </div>
-
-    <div class="faq-item">
-      <p class="faq-q">Does this replace my office staff or dispatcher?</p>
-      <p class="faq-a">No. This handles missed calls &mdash; the ones that currently get no response at all. If you have staff available, they answer first. The First-Response Capture System only activates when a call goes unanswered. It is a backup that runs when your team cannot get to it.</p>
-    </div>
-
-    <div class="faq-item">
-      <p class="faq-q">What does it cost?</p>
-      <p class="faq-a">Pricing is based on your call volume and setup requirements. We do not quote before understanding your situation. We will cover it on the 15-minute call &mdash; after we have looked at your numbers together.</p>
-    </div>
-
-    <div class="faq-item">
-      <p class="faq-q">What if I want to cancel?</p>
-      <p class="faq-a">Month-to-month agreements are standard. We do not lock clients into long contracts because a system that's working pays for itself. If you want to leave, you can. We will cover the full terms on the call.</p>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
+<!-- ─────────────────────────────────────────
+  12. FINAL CTA — Last nudge for anyone still scrolling
+───────────────────────────────────────── -->
 <section style="text-align:center; padding: 80px 0; border-bottom: 1px solid var(--border);">
   <div class="container">
     <span class="label" style="display:block; text-align:center;">One last thing</span>
@@ -759,7 +772,7 @@
   </div>
 </section>
 
-<!-- PRIVACY & TERMS (minimal, on-page) -->
+<!-- LEGAL -->
 <section id="privacy" class="legal-section">
   <div class="container">
     <h3>Privacy Policy</h3>
